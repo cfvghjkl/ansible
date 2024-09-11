@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    environment {
+        ANSIBLE_INVENTORY = 'hosts'
+        ANSIBLE_PLAYBOOK = 'install_nginx.yml'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your repository
+                git 'https://github.com/cfvghjkl/ansible.git'
+            }
+        }
+       
+        stage('Run Ansible Playbook') {
+            steps {
+                // Run the Ansible playbook to install Nginx
+                sh '''
+                ansible-playbook -i ${ANSIBLE_INVENTORY} ${ANSIBLE_PLAYBOOK}
+                '''
+            }
+        }
+    }
+}
