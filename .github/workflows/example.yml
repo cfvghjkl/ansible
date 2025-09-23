@@ -6,6 +6,9 @@ jobs:
         steps:
            - name: welcome
              run : echo "welcome"
+
+           - name: checkout Repo
+             run : actions/checkout@v4
+             
            - name : files
              run : ls
-             
