@@ -19,4 +19,12 @@ jobs:
           run: pip install ansible
           
         - name: Run Ansible Playbook
-          run: ansible-playbook install_nginx.yml 
+          run: ansible-playbook install_nginx.yml |tee ansible.log
+
+        - name: Upload Ansible Log
+          uses: actions/upload-artifacts@v3
+          with:
+            name: ansible-log
+            path: ansible.log
+        - name: Read
+          run: cat ansible.log    
